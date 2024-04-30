@@ -103,7 +103,7 @@ app.post("/billing", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 8000; 
 const IP_ADDRESS = "localhost"; 
 
 app.listen(PORT, IP_ADDRESS, () => {

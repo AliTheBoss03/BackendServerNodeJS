@@ -11,27 +11,73 @@ app.use(cors());
 mongoose.connect("mongodb://localhost:27017/backEnd");
 
 const billingSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  addressLine1: String,
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  addressLine1: {
+    type: String,
+    required: true
+  },
   addressLine2: String,
-  city: String,
-  zipCode: String,
-  country: String,
+  city: {
+    type: String,
+    required: true
+  },
+  zipCode: {
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
   companyName: String,
-  termsAccepted: Boolean,
-  receiveMarketing: Boolean,
+  termsAccepted: {
+    type: Boolean,
+    required: true
+  },
+  marketingAccepted: Boolean,
   orderComment: String,
   vatNumber: String,
-  totalPrice: Number,
-  cart: [
+  totalPriceInfo: [
+    {discountOver300: Number,
+      orderDiscount: Number,
+      subtotal: Number,
+      totalPrice: Number,
+    }
+  ],
+  productsInCart: [
     {
-      id: String,
-      name: String,
-      price: Number,
-      currency: String,
-      quantity: Number,
+      id: {
+        type: String,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      price: {
+        type: Number,
+        required: true
+      },
+      currency: {
+        type: String,
+        required: true
+      },
+      quantity: {
+        type: Number,
+        required: true
+      },
       rebatePercent: Number,
       rebateQuantity: Number,
       upsellProductId: String,
@@ -57,7 +103,9 @@ app.post("/billing", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const PORT = process.env.PORT || 3000; 
+const IP_ADDRESS = "localhost"; 
+
+app.listen(PORT, IP_ADDRESS, () => {
+  console.log(`Server running on ${IP_ADDRESS}:${PORT}`);
 });

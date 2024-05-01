@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect("mongodb://localhost:27017/backEnd");
+mongoose.connect("mongodb://localhost:27017/");
 
 const billingSchema = new mongoose.Schema({
   name: {

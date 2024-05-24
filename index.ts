@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect("mongodb://127.0.0.1:27017/");
+mongoose.connect("mongodb://127.0.0.1:27017/mydatabase", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const billingSchema = new mongoose.Schema({
   name: {
@@ -88,10 +88,9 @@ const billingSchema = new mongoose.Schema({
 
 const Billing = mongoose.model("Billing", billingSchema);
 
-app.post("/billing", async (req, res) => {
+app.post("api/billing", async (req, res) => {
   try {
     const newBilling = new Billing(req.body);
-
     await newBilling.save();
 
     res.status(200).json({ message: "Billing information saved successfully" });
@@ -104,8 +103,7 @@ app.post("/billing", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000; 
-const IP_ADDRESS = "localhost"; 
 
-app.listen(PORT, IP_ADDRESS, () => {
-  console.log(`Server running on ${IP_ADDRESS}:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on 0.0.0.0:${PORT}`);
 });

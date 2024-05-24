@@ -8,8 +8,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect("mongodb://127.0.0.1:27017/mydatabase", { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect("mongodb://127.0.0.1:27017/mydatabase")
+.then(() => console.log('MongoDB connected...'))
+.catch(err => console.error(err));
 const billingSchema = new mongoose.Schema({
   name: {
     type: String,

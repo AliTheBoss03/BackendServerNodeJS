@@ -89,7 +89,7 @@ const billingSchema = new mongoose.Schema({
 
 const Billing = mongoose.model("Billing", billingSchema);
 
-app.post("api/billing", async (req, res) => {
+app.post("/api/billing", async (req, res) => {
   try {
     const newBilling = new Billing(req.body);
     await newBilling.save();

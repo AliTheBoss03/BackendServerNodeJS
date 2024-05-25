@@ -1,3 +1,5 @@
+import { or } from "sequelize";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -5,8 +7,13 @@ const cors = require("cors");
 
 const app = express();
 
+const corsOptions = {
+  origin: "http://130.225.170.52",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use(cors());
+
 
 mongoose.connect("mongodb://127.0.0.1:27017/mydatabase")
 .then(() => console.log('MongoDB connected...'))

@@ -18,7 +18,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const corsOptions = {
-    origin: "http://130.225.170.52",
+    origin: true,
     optionsSuccessStatus: 200,
 };
 app.use((0, cors_1.default)(corsOptions));

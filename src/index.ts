@@ -1,9 +1,8 @@
-
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const http = require("http");
+import express, { Request, Response } from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import http from 'http';
 
 const app = express();
 
@@ -11,13 +10,14 @@ const corsOptions = {
   origin: "http://130.225.170.52",
   optionsSuccessStatus: 200,
 };
+
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-
 mongoose.connect("mongodb+srv://almoma:Alimasoud2003@cluster0.0ykzcxs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-.then(() => console.log('MongoDB connected...'))
-.catch(err => console.error(err));
+  .then(() => console.log('MongoDB connected...'))
+  .catch((err: any) => console.error(err));
+
 const billingSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -58,7 +58,8 @@ const billingSchema = new mongoose.Schema({
   orderComment: String,
   vatNumber: String,
   totalPriceInfo: [
-    {discountOver300: Number,
+    {
+      discountOver300: Number,
       orderDiscount: Number,
       subtotal: Number,
       totalPrice: Number,
@@ -96,7 +97,7 @@ const billingSchema = new mongoose.Schema({
 
 const Billing = mongoose.model("Billing", billingSchema);
 
-app.post("/api/billing", async (req, res) => {
+app.post("/api/billing", async (req: Request, res: Response) => {
   try {
     const newBilling = new Billing(req.body);
     await newBilling.save();
@@ -104,13 +105,11 @@ app.post("/api/billing", async (req, res) => {
     res.status(200).json({ message: "Billing information saved successfully" });
   } catch (error) {
     console.error("Error saving billing information:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while saving billing information" });
+    res.status(500).json({ error: "An error occurred while saving billing information" });
   }
 });
 
-const PORT = process.env.PORT || 3000; 
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on 0.0.0.0:${PORT}`);

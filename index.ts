@@ -15,7 +15,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/mydatabase")
+mongoose.connect("mongodb+srv://almoma:Alimasoud2003@cluster0.0ykzcxs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() => console.log('MongoDB connected...'))
 .catch(err => console.error(err));
 const billingSchema = new mongoose.Schema({

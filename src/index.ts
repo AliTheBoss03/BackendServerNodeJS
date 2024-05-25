@@ -7,7 +7,7 @@ import http from 'http';
 const app = express();
 
 const corsOptions = {
-  origin: "http://130.225.170.52",
+  origin: true,
   optionsSuccessStatus: 200,
 };
 

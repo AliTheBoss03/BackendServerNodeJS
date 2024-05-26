@@ -8,7 +8,7 @@ const cors = require('cors')
 const app = express();
 
 const corsOptions = {
-  origin: true,
+  origin: "*",
   optionsSuccessStatus: 200,
 };
 
@@ -19,82 +19,83 @@ mongoose.connect("mongodb+srv://almoma:Alimasoud2003@cluster0.0ykzcxs.mongodb.ne
   .then(() => console.log('MongoDB connected...'))
   .catch((err) => console.error(err));
 
-const billingSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  addressLine1: {
-    type: String,
-    required: true
-  },
-  addressLine2: String,
-  city: {
-    type: String,
-    required: true
-  },
-  zipCode: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  companyName: String,
-  termsAccepted: {
-    type: Boolean,
-    required: true
-  },
-  marketingAccepted: Boolean,
-  orderComment: String,
-  vatNumber: String,
-  totalPriceInfo: [
-    {
-      discountOver300: Number,
-      orderDiscount: Number,
-      subtotal: Number,
-      totalPrice: Number,
-    }
-  ],
-  productsInCart: [
-    {
-      id: {
-        type: String,
-        required: true
-      },
-      name: {
-        type: String,
-        required: true
-      },
-      price: {
-        type: Number,
-        required: true
-      },
-      currency: {
-        type: String,
-        required: true
-      },
-      quantity: {
-        type: Number,
-        required: true
-      },
-      rebatePercent: Number,
-      rebateQuantity: Number,
-      upsellProductId: String,
-      imageUrl: String,
+  const billingSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: true
     },
-  ],
-});
+    email: {
+      type: String,
+      required: true,
+      match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    },
+    phone: {
+      type: String,
+      required: true
+    },
+    addressLine1: {
+      type: String,
+      required: true
+    },
+    addressLine2: String,
+    city: {
+      type: String,
+      required: true
+    },
+    zipCode: {
+      type: String,
+      required: true
+    },
+    country: {
+      type: String,
+      required: true
+    },
+    companyName: String,
+    termsAccepted: {
+      type: Boolean,
+      required: true
+    },
+    marketingAccepted: Boolean,
+    orderComment: String,
+    vatNumber: String,
+    totalPriceInfo: [
+      {
+        discountOver300: Number,
+        orderDiscount: Number,
+        subtotal: Number,
+        totalPrice: Number,
+      }
+    ],
+    productsInCart: [
+      {
+        id: {
+          type: String,
+          required: true
+        },
+        name: {
+          type: String,
+          required: true
+        },
+        price: {
+          type: Number,
+          required: true
+        },
+        currency: {
+          type: String,
+          required: true
+        },
+        quantity: {
+          type: Number,
+          required: true
+        },
+        rebatePercent: Number,
+        rebateQuantity: Number,
+        upsellProductId: String,
+        imageUrl: String,
+      },
+    ],
+  });
+  
 
 const Billing = mongoose.model("Billing", billingSchema);
 

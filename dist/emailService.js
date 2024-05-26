@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail', // Du kan bruge andre e-mail tjenester
   auth: {
     user: 'webshop.backend@gmail.com',
-    pass: 'Ali292003'
+    pass: 'avns mxoc nymk jehb'
   }
 });
 

@@ -6,7 +6,7 @@
       "strict": true,
       "esModuleInterop": true
     },
-    "include": ["src/**/*", "dist/test.js"],
+    "include": ["src/**/*", "dist/test.js", "dist/emailService.js"],
     "exclude": ["node_modules", "**/*.spec.ts"]
   }
   
